@@ -125,7 +125,7 @@ We switched to new certificate now for shim15.6 signing, which blocks all the ol
 ### Is upstream commit [eadb2f47a3ced5c64b23b90fd2a3463f63726066 "lockdown: also lock down previous kgdb use"](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=eadb2f47a3ced5c64b23b90fd2a3463f63726066) applied?
 
 -------------------------------------------------------------------------------
-We will use SuSE Linux Enterprise Server kernel(SLES15SP4), First two patches present in this kernel. 
+We will use SuSE Linux Enterprise Server kernel(SLES15SP4) 5.14.21-150400.22-default , First two patches present in this kernel. 
 3rd one is not applicable as kernel debugging not allowed in kernel, as we are using PXE booted minimal distro environment to do imaging.
 
 -------------------------------------------------------------------------------
@@ -230,7 +230,7 @@ No.
 -------------------------------------------------------------------------------
 ### What kernel are you using? Which patches does it includes to enforce Secure Boot?
 -------------------------------------------------------------------------------
-Suse Linux Enterprise kernel SLES15SP4, which has the all the required patches to enforce the secure boot.
+Suse Linux Enterprise kernel SLES15SP4 5.14.21-150400.22-default, which has the all the required patches to enforce the secure boot.
 
 -------------------------------------------------------------------------------
 ### Add any additional information you think we may need to validate this shim.
