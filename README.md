@@ -35,7 +35,7 @@ We support software tools for OS Backup/Restore/Deployment for Windows and Linux
 *******************************************************************************
 ### Why are you unable to reuse shim from another distro that is already signed?
 *******************************************************************************
-We have custom code is shim to prefer the proxyOffer instead DhcpAck
+We have custom code added in shim to prefer the proxyOffer instead of DhcpAck
 We have second stage boot loader, which talks to our server to get the work type and loads WinPE or SLES to do imaging and other tasks.
 
 *******************************************************************************
@@ -73,9 +73,9 @@ Please create your shim binaries starting with the 15.7 shim release tar file: h
 This matches https://github.com/rhboot/shim/releases/tag/15.7 and contains the appropriate gnu-efi source.
 
 *******************************************************************************
-Yes, used the source tar from https://github.com/rhboot/shim/releases/download/15.7/shim-15.7.tar.bz2 
-Patch:
-      1. NX compatibility flag by default patch https://github.com/rhboot/shim/pull/530
+Yes, used the source from git repo using #git clone --recursive -b 15.7 https://github.com/rhboot/shim.git shim-15.7 
+Patches:
+      1. Required patches 530,531,535 added.
       2. Added our custom patch to precedence for ProxyOfferReceived in IPV4/6
 
 *******************************************************************************
@@ -87,11 +87,11 @@ https://github.com/rhboot/shim/releases/download/15.7/shim-15.7.tar.bz2
 ### What patches are being applied and why:
 *******************************************************************************
 1. Code added to prefer proxyDhcpOfferReceived over dhcpAck in case IPv4/6.
-2. NX compatibility flag by default patch
+2. Required patches 530,531,535 added.
 *******************************************************************************
 ### If shim is loading GRUB2 bootloader what exact implementation of Secureboot in GRUB2 do you have? (Either Upstream GRUB2 shim_lock verifier or Downstream RHEL/Fedora/Debian/Canonical-like implementation)
 *******************************************************************************
-[your text here]
+Downstream RHEL/Fedora/Debian/Canonical like implementation
 
 *******************************************************************************
 ### If shim is loading GRUB2 bootloader and your previously released shim booted a version of grub affected by any of the CVEs in the July 2020 grub2 CVE list, the March 2021 grub2 CVE list, the June 7th 2022 grub2 CVE list, or the November 15th 2022 list, have fixes for all these CVEs been applied?
@@ -123,12 +123,12 @@ https://github.com/rhboot/shim/releases/download/15.7/shim-15.7.tar.bz2
 * CVE-2022-2601
 * CVE-2022-3775
 *******************************************************************************
-[your text here]
+Yes.
 
 *******************************************************************************
 ### If these fixes have been applied, have you set the global SBAT generation on your GRUB binary to 3?
 *******************************************************************************
-[your text here]
+Yes.
 
 *******************************************************************************
 ### Were old shims hashes provided to Microsoft for verification and to be added to future DBX updates?
@@ -183,7 +183,8 @@ No changes added. Only the version update from shim 15.4 to 15.7.
 *******************************************************************************
 ### What is the SHA256 hash of your final SHIM binary?
 *******************************************************************************
-[your text here]
+7e947ac9e3401b0f3a2103201af2bcd6eae01461b04311f5e78718903852748d  shimia32.efi
+daef7d08b84bc8a7e0331d7640aa2442f3922de2c846714dbaff78ac2aa19352  shimx64.efi
 
 *******************************************************************************
 ### How do you manage and protect the keys used in your SHIM?
@@ -206,7 +207,7 @@ shim.MFZENworks,1,MicroFocus,shim,15.7-0-ZENworks1,https://www.microfocus.com/
 
 grub:
 sbat,1,SBAT Version,sbat,1,https://github.com/rhboot/shim/blob/main/SBAT.md
-grub,1,Free Software Foundation,grub,2.06,https://www.gnu.org/software/grub/
+grub,3,Free Software Foundation,grub,2.06,https://www.gnu.org/software/grub/
 grub.sle,1,SUSE Linux Enterprise,grub2,2.06,mail:security-team@suse.de
 grub.MFZENworks,1,MicroFocus,grub2,2.06-0-ZENworks1,https://www.microfocus.com/
 ### Which modules are built into your signed grub image?
@@ -224,7 +225,7 @@ http://download.opensuse.org/tumbleweed/repo/oss/src/grub2-2.06-28.3.src.rpm
 *******************************************************************************
 ### If your SHIM launches any other components, please provide further details on what is launched.
 *******************************************************************************
-In case of PXE boot, we launch our custom efi binary, which talks to our server and get the work details and loads the Suse-Linux or WinPE based on the work type.
+In case of PXE boot, we launch our custom efi binary, which talks to our server and get the work details and loads WinPE(Windows Preboot Environment) or Suse-Linux based on the work type.
 
 *******************************************************************************
 ### If your GRUB2 launches any other binaries that are not the Linux kernel in SecureBoot mode, please provide further details on what is launched and how it enforces Secureboot lockdown.
