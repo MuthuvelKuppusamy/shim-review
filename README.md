@@ -183,8 +183,8 @@ No changes added. Only the version update from shim 15.4 to 15.7.
 *******************************************************************************
 ### What is the SHA256 hash of your final SHIM binary?
 *******************************************************************************
-7e947ac9e3401b0f3a2103201af2bcd6eae01461b04311f5e78718903852748d  shimia32.efi
-daef7d08b84bc8a7e0331d7640aa2442f3922de2c846714dbaff78ac2aa19352  shimx64.efi
+923ea4c27ae6cfe219097b5e9468353dfbab29f6fc5c1c18f75b54fccc525d19  shimia32.efi
+2c8af042ab1b099ed92cf30a8f0ddc61f381e9f8b19c704464098b61fe4a306f  shimx64.efi
 
 *******************************************************************************
 ### How do you manage and protect the keys used in your SHIM?
@@ -202,14 +202,14 @@ No.
 ### Where your code is only slightly modified from an upstream vendor's, please also preserve their SBAT entries to simplify revocation.
 *******************************************************************************
 sbat,1,SBAT Version,sbat,1,https://github.com/rhboot/shim/blob/main/SBAT.md
-shim,1,UEFI shim,shim,1,https://github.com/rhboot/shim
-shim.MFZENworks,1,MicroFocus,shim,15.7-0-ZENworks1,https://www.microfocus.com/
+shim,3,UEFI shim,shim,1,https://github.com/rhboot/shim
+shim.MFZENworks,3,MicroFocus,shim,15.7-0-ZENworks1,https://www.microfocus.com/
 
 grub:
 sbat,1,SBAT Version,sbat,1,https://github.com/rhboot/shim/blob/main/SBAT.md
 grub,3,Free Software Foundation,grub,2.06,https://www.gnu.org/software/grub/
-grub.sle,1,SUSE Linux Enterprise,grub2,2.06,mail:security-team@suse.de
-grub.MFZENworks,1,MicroFocus,grub2,2.06-0-ZENworks1,https://www.microfocus.com/
+grub.sle,3,SUSE Linux Enterprise,grub2,2.06,mail:security-team@suse.de
+grub.MFZENworks,3,MicroFocus,grub2,2.06-0-ZENworks1,https://www.microfocus.com/
 ### Which modules are built into your signed grub image?
 *******************************************************************************
 grub-core all_video boot cat chain configfile echo true efinet font gfxmenu gfxterm gzio halt iso9660 jpeg 

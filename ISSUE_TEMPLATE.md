@@ -17,8 +17,8 @@ https://github.com/MuthuvelKuppusamy/shim-review/tree/microfocus-shim-x64-ia32-2
 *******************************************************************************
 ### What is the SHA256 hash of your final SHIM binary?
 *******************************************************************************
-7e947ac9e3401b0f3a2103201af2bcd6eae01461b04311f5e78718903852748d  shimia32.efi
-daef7d08b84bc8a7e0331d7640aa2442f3922de2c846714dbaff78ac2aa19352  shimx64.efi
+923ea4c27ae6cfe219097b5e9468353dfbab29f6fc5c1c18f75b54fccc525d19  shimia32.efi
+2c8af042ab1b099ed92cf30a8f0ddc61f381e9f8b19c704464098b61fe4a306f  shimx64.efi
 
 *******************************************************************************
 ### What is the link to your previous shim review request (if any, otherwise N/A)?
