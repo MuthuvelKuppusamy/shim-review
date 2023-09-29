@@ -236,8 +236,7 @@ gcry_sha1 gcry_sha256 mdraid09 mdraid1x lvm serial
 *******************************************************************************
 ### What is the origin and full version number of your bootloader (GRUB or other)?
 *******************************************************************************
-https://github.com/MuthuvelKuppusamy/shim-review/tree/microfocus-shim-x64-ia32-20230929/grub2
-
+https://github.com/MuthuvelKuppusamy/shim-review/tree/opentext-shim-x64-ia32-20230929/grub2
 *******************************************************************************
 ### If your SHIM launches any other components, please provide further details on what is launched.
 *******************************************************************************
