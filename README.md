@@ -51,7 +51,7 @@ You will be asked to post the contents of these mails in your `shim-review` issu
 - Name: Muthuvel K
 - Position: Principal Engineer
 - Email address: mkuppusamy@opentext.com
-- PGP key fingerprint:
+- PGP key fingerprint: D6B3 FC57 4885 E1BB 9571  DD3D 7C19 A3F1 FB91 CAA9
 
 (Key should be signed by the other security contacts, pushed to a keyserver
 like keyserver.ubuntu.com, and preferably have signatures that are reasonably
@@ -63,7 +63,7 @@ well known in the Linux community.)
 - Name: Anand Navale
 - Position: Product Architect
 - Email address: anavale@opentext.com
-- PGP key fingerprint:
+- PGP key fingerprint: 16CE 63BC 1721 DEE3 DF56  B5CE B042 EB9A 132E 7739
 
 (Key should be signed by the other security contacts, pushed to a keyserver
 like keyserver.ubuntu.com, and preferably have signatures that are reasonably
