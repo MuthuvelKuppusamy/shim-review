@@ -1,0 +1,37 @@
+diff --git a/netboot.c b/netboot.c
+index d8b1093..fb21eea 100644
+--- a/netboot.c
++++ b/netboot.c
+@@ -229,9 +229,17 @@ static BOOLEAN extract_tftp_info(CHAR8 *url, CHAR8 *name)
+ static EFI_STATUS parseDhcp6(CHAR8 *name)
+ {
+ 	EFI_PXE_BASE_CODE_DHCPV6_PACKET *packet = (EFI_PXE_BASE_CODE_DHCPV6_PACKET *)&pxe->Mode->DhcpAck.Raw;
+-	CHAR8 *bootfile_url;
++	CHAR8 *bootfile_url = NULL;
++
++	//Precedence for proxyDhcpOfferReceived, fall back to DhcpAck
++	if(pxe->Mode->ProxyOfferReceived) {
++		EFI_PXE_BASE_CODE_DHCPV6_PACKET *proxyPacket = (EFI_PXE_BASE_CODE_DHCPV6_PACKET *)&pxe->Mode->ProxyOffer.Raw;
++		bootfile_url = get_v6_bootfile_url(proxyPacket);
++	}
++	if( !bootfile_url ){
++		bootfile_url = get_v6_bootfile_url(packet);
++	}
+ 
+-	bootfile_url = get_v6_bootfile_url(packet);
+ 	if (!bootfile_url)
+ 		return EFI_NOT_FOUND;
+ 	if (extract_tftp_info(bootfile_url, name) == FALSE) {
+@@ -256,10 +264,10 @@ static EFI_STATUS parseDhcp4(CHAR8 *name)
+ 
+ 	if(pxe->Mode->ProxyOfferReceived) {
+ 		/*
+-		 * Proxy should not have precedence.  Check if DhcpAck
++		 * Proxy should have precedence.  Check if DhcpAck
+ 		 * contained boot info.
+ 		 */
+-		if(pxe->Mode->DhcpAck.Dhcpv4.BootpBootFile[0] == '\0')
++		//if(pxe->Mode->DhcpAck.Dhcpv4.BootpBootFile[0] == '\0')
+ 			pkt_v4 = &pxe->Mode->ProxyOffer.Dhcpv4;
+ 	}
+ 
