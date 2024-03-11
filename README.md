@@ -163,7 +163,7 @@ grub.MFZENworks,1,MicroFocus,grub2,2.12-ZENworks1,https://www.microfocus.com/
 ### Does your new chain of trust disallow booting old GRUB2 builds affected by the CVEs?
 *******************************************************************************
 Older shim hashes provided to Microsoft.
-We switched to new certificate now for shim15.8 signing, which blocks all the older signed grub2 binaries.
+We have not included ntfs module in grub2 and older grub2 with sbat < 3 will be disallowed, we are safe with older grub's.
 
 *******************************************************************************
 ### If your boot chain of trust includes a Linux kernel:
@@ -195,8 +195,7 @@ No.
 ### If you are re-using a previously used (CA) certificate, you will need to add the hashes of the previous GRUB2 binaries exposed to the CVEs to vendor_dbx in shim in order to prevent GRUB2 from being able to chainload those older GRUB2 binaries. If you are changing to a new (CA) certificate, this does not apply.
 ### Please describe your strategy.
 *******************************************************************************
-We switched to new certificate now for shim15.8 signing.
-
+We have not included ntfs module in grub2 and older grub2 with sbat < 3 will be disallowed, we are safe with older grub's.
 *******************************************************************************
 ### What OS and toolchain must we use to reproduce this build?  Include where to find it, etc.  We're going to try to reproduce your build as closely as possible to verify that it's really a build of the source tree you tell us it is, so these need to be fairly thorough. At the very least include the specific versions of gcc, binutils, and gnu-efi which were used, and where to find those binaries.
 ### If the shim binaries can't be reproduced using the provided Dockerfile, please explain why that's the case and what the differences would be.
