@@ -156,7 +156,7 @@ As below,
 sbat,1,SBAT Version,sbat,1,https://github.com/rhboot/shim/blob/main/SBAT.md
 grub,4,Free Software Foundation,grub,2.12,https://www.gnu.org/software/grub/
 grub.sle,1,SUSE Linux Enterprise,grub2,2.12,mail:security-team@suse.de
-grub.MFZENworks,1,MicroFocus,grub2,2.12-ZENworks1,https://www.microfocus.com/
+grub.OTZENworks,1,OpenText,grub2,2.12-ZENworks1,https://www.opentext.com/
 
 *******************************************************************************
 ### Were old shims hashes provided to Microsoft for verification and to be added to future DBX updates?
@@ -240,13 +240,13 @@ and only append your own. More information on how SBAT works can be found
 *******************************************************************************
 sbat,1,SBAT Version,sbat,1,https://github.com/rhboot/shim/blob/main/SBAT.md
 shim,4,UEFI shim,shim,1,https://github.com/rhboot/shim
-shim.MFZENworks,1,MicroFocus,shim,15.8,https://www.microfocus.com/
+shim.OTZENworks,1,OpenText,shim,15.8,https://www.opentext.com/
 
 grub:
 sbat,1,SBAT Version,sbat,1,https://github.com/rhboot/shim/blob/main/SBAT.md
 grub,4,Free Software Foundation,grub,2.12,https://www.gnu.org/software/grub/
 grub.sle,1,SUSE Linux Enterprise,grub2,2.12,mail:security-team@suse.de
-grub.MFZENworks,1,MicroFocus,grub2,2.12-ZENworks1,https://www.microfocus.com/
+grub.OTZENworks,1,OpenText,grub2,2.12-ZENworks1,https://www.opentext.com/
 
 *******************************************************************************
 ### If shim is loading GRUB2 bootloader, which modules are built into your signed GRUB2 image?
