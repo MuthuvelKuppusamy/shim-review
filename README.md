@@ -357,7 +357,7 @@ NA
 *******************************************************************************
 ### What is the origin and full version number of your bootloader (GRUB2 or systemd-boot or other)?
 *******************************************************************************
-https://github.com/MuthuvelKuppusamy/shim-review/tree/opentext-shim-x64-ia32-20241016/grub2
+https://github.com/MuthuvelKuppusamy/shim-review/tree/opentext-shim-x64-ia32-20251016/grub2
 
 *******************************************************************************
 ### If your shim launches any other components apart from your bootloader, please provide further details on what is launched.
