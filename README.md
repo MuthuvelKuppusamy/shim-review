@@ -85,7 +85,8 @@ well known in the Linux community.)
 - Name: Anand Navale
 - Position: Product Architect
 - Email address: anavale@opentext.com
-- PGP key fingerprint: 16CE 63BC 1721 DEE3 DF56  B5CE B042 EB9A 132E 7739
+- PGP key fingerprint: 5993 0320 8D95 01AC 4900 9EE2 203D 1BE8 164B B214
+
 
 (Key should be signed by the other security contacts, pushed to a keyserver
 like keyserver.ubuntu.com, and preferably have signatures that are reasonably
