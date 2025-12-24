@@ -12,7 +12,7 @@ Confirm the following are included in your repo, checking each box:
 *******************************************************************************
 ### What is the link to your tag in a repo cloned from rhboot/shim-review?
 *******************************************************************************
-https://github.com/MuthuvelKuppusamy/shim-review/tree/opentext-shim-x64-ia32-20251016
+https://github.com/MuthuvelKuppusamy/shim-review/tree/opentext-shim-x64-ia32-20251224
 
 *******************************************************************************
 ### What is the SHA256 hash of your final SHIM binary?
@@ -23,9 +23,9 @@ https://github.com/MuthuvelKuppusamy/shim-review/tree/opentext-shim-x64-ia32-202
 *******************************************************************************
 ### What is the link to your previous shim review request (if any, otherwise N/A)?
 *******************************************************************************
-https://github.com/rhboot/shim-review/issues/389
+https://github.com/rhboot/shim-review/issues/505
 
 *******************************************************************************
 ### If no security contacts have changed since verification, what is the link to your request, where they've been verified (if any, otherwise N/A)?
 *******************************************************************************
-https://github.com/rhboot/shim-review/issues/166
+https://github.com/rhboot/shim-review/issues/505

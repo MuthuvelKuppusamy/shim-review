@@ -135,7 +135,7 @@ Hint: If you attach all the patches and modifications that are being used to you
 
 You can also point to your custom git servers, where the code is hosted.
 *******************************************************************************
-https://github.com/MuthuvelKuppusamy/shim-review/tree/opentext-shim-x64-ia32-20251016
+https://github.com/MuthuvelKuppusamy/shim-review/tree/opentext-shim-x64-ia32-20251224
 
 *******************************************************************************
 ### What patches are being applied and why:
@@ -358,7 +358,7 @@ NA
 *******************************************************************************
 ### What is the origin and full version number of your bootloader (GRUB2 or systemd-boot or other)?
 *******************************************************************************
-https://github.com/MuthuvelKuppusamy/shim-review/tree/opentext-shim-x64-ia32-20251016/grub2
+https://github.com/MuthuvelKuppusamy/shim-review/tree/opentext-shim-x64-ia32-20251224/grub2
 
 *******************************************************************************
 ### If your shim launches any other components apart from your bootloader, please provide further details on what is launched.
