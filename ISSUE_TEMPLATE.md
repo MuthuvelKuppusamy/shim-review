@@ -17,8 +17,8 @@ https://github.com/MuthuvelKuppusamy/shim-review/tree/opentext-shim-x64-ia32-202
 *******************************************************************************
 ### What is the SHA256 hash of your final SHIM binary?
 *******************************************************************************
-60df140d0064c4fcb213d6d940a5c54f57f3e0a66ca1e83cf4e346ecf4d84ad6  shimia32.efi
-4f6cc552e86c342678d0398020b6027b30208b094024d284afbc3c11aad2fb83  shimx64.efi
+340a2a6c624f8ac9833c2877002f32ab7886b38e8be9bc0adea4712b1c98b91c  shimia32.efi
+018bfaa21ed4f954e0dc9c589fcec62f877eb44cf3ae5568df20fe9832e8d422  shimx64.efi
 
 *******************************************************************************
 ### What is the link to your previous shim review request (if any, otherwise N/A)?

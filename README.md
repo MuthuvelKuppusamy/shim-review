@@ -44,8 +44,8 @@ Example:
 Issuer: O=MyIssuer, Ltd., CN=MyIssuer EV Code Signing CA
 Subject: C=XX, O=MyCompany, Inc., CN=MyCompany, Inc.
 ```
-Issuer: C = BE, O = GlobalSign nv-sa, CN = GlobalSign GCC R45 EV CodeSigning CA 2020
-Subject: businessCategory = Private Organization, serialNumber = 1083604-4, jurisdictionC = CA, jurisdictionST = Ontario, C = CA, ST = Ontario, L = Waterloo, street = 275 Frank Tompa Drive, O = Open Text Corporation, CN = Open Text Corporation, emailAddress = adakhqan@opentext.com
+Issuer: C=US, O=DigiCert, Inc., CN=DigiCert Trusted G4 Code Signing RSA4096 SHA384 2021 CA1
+Subject: jurisdictionC=CA, businessCategory=Private Organization, serialNumber=1083604-4, C=CA, ST=Ontario, L=Waterloo, O=Open Text Corporation, CN=Open Text Corporation
 
 *******************************************************************************
 ### What product or service is this for?
@@ -293,8 +293,8 @@ No changes.
 *******************************************************************************
 ### What is the SHA256 hash of your final shim binary?
 *******************************************************************************
-60df140d0064c4fcb213d6d940a5c54f57f3e0a66ca1e83cf4e346ecf4d84ad6  shimia32.efi
-4f6cc552e86c342678d0398020b6027b30208b094024d284afbc3c11aad2fb83  shimx64.efi
+340a2a6c624f8ac9833c2877002f32ab7886b38e8be9bc0adea4712b1c98b91c  shimia32.efi
+018bfaa21ed4f954e0dc9c589fcec62f877eb44cf3ae5568df20fe9832e8d422  shimx64.efi
 
 *******************************************************************************
 ### How do you manage and protect the keys used in your shim?
