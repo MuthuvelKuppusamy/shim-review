@@ -15,7 +15,7 @@ WORKDIR /shimx64/shim-16.1
 RUN git apply /shim-review/patches/*.patch
 
 RUN cp /shim-review/opentext.der /shimx64/shim-16.1/ && cp /shim-review/sbat.otzenworks.csv  /shimx64/shim-16.1/data/sbat.csv
-RUN make DEBUG=1 ENABLE_SHIM_HASH=true VENDOR_CERT_FILE=opentext.der 'DEFAULT_LOADER=\\\\otgrubx64.efi'
+RUN make DEBUG=1 ENABLE_SHIM_HASH=true VENDOR_CERT_FILE=opentext.der ARCH=x86_64 'DEFAULT_LOADER=\\\\otgrubx64.efi'
 RUN mkdir -p /shim-16.1/build-x64 && cp shimx64.efi /shim-16.1/build-x64/
 
 #Build for ia32 from fresh code
