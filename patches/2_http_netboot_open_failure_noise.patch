@@ -1,0 +1,104 @@
+diff --git a/httpboot.c b/httpboot.c
+index ccbe028..f6a66eb 100644
+--- a/httpboot.c
++++ b/httpboot.c
+@@ -555,7 +555,7 @@ no_event:
+ }
+ 
+ static EFI_STATUS
+-receive_http_response(EFI_HTTP_PROTOCOL *http, VOID **buffer, UINT64 *buf_size)
++receive_http_response(EFI_HTTP_PROTOCOL *http, VOID **buffer, UINT64 *buf_size, int flags)
+ {
+ 	EFI_HTTP_TOKEN rx_token;
+ 	EFI_HTTP_MESSAGE rx_message;
+@@ -602,7 +602,8 @@ receive_http_response(EFI_HTTP_PROTOCOL *http, VOID **buffer, UINT64 *buf_size)
+ 		http->Poll(http);
+ 
+ 	if (EFI_ERROR(rx_token.Status)) {
+-		perror(L"HTTP response: %r\n", rx_token.Status);
++		if (~flags & SUPPRESS_NETBOOT_OPEN_FAILURE_NOISE)
++			perror(L"HTTP response: %r\n", rx_token.Status);
+ 		efi_status = rx_token.Status;
+ 		goto error;
+ 	}
+@@ -610,8 +611,9 @@ receive_http_response(EFI_HTTP_PROTOCOL *http, VOID **buffer, UINT64 *buf_size)
+ 	/* Check the HTTP status code */
+ 	http_status = rx_token.Message->Data.Response->StatusCode;
+ 	if (http_status != HTTP_STATUS_200_OK) {
+-		perror(L"HTTP Status Code: %d\n",
+-		       convert_http_status_code(http_status));
++		if (~flags & SUPPRESS_NETBOOT_OPEN_FAILURE_NOISE)
++			perror(L"HTTP Status Code: %d\n",
++			       convert_http_status_code(http_status));
+ 		efi_status = efi_status_from_http_status(http_status);
+ 		goto error;
+ 	}
+@@ -707,7 +709,7 @@ no_event:
+ static EFI_STATUS
+ http_fetch (EFI_HANDLE image, EFI_HANDLE device,
+ 	    CHAR8 *hostname, CHAR8 *uri, BOOLEAN is_ip6,
+-	    VOID **buffer, UINT64 *buf_size)
++	    VOID **buffer, UINT64 *buf_size, int flags)
+ {
+ 	EFI_SERVICE_BINDING *service;
+ 	EFI_HANDLE http_handle;
+@@ -754,9 +756,10 @@ http_fetch (EFI_HANDLE image, EFI_HANDLE device,
+ 		goto error;
+ 	}
+ 
+-	efi_status = receive_http_response(http, buffer, buf_size);
++	efi_status = receive_http_response(http, buffer, buf_size, flags);
+ 	if (EFI_ERROR(efi_status)) {
+-		perror(L"Failed to receive HTTP response: %r\n", efi_status);
++		if (~flags & SUPPRESS_NETBOOT_OPEN_FAILURE_NOISE)
++			perror(L"Failed to receive HTTP response: %r\n", efi_status);
+ 		goto error;
+ 	}
+ 
+@@ -773,7 +776,7 @@ error:
+ 
+ EFI_STATUS
+ httpboot_fetch_buffer (EFI_HANDLE image, VOID **buffer, UINT64 *buf_size,
+-		CHAR8 *name)
++		CHAR8 *name, int flags)
+ {
+ 	EFI_STATUS efi_status;
+ 	EFI_HANDLE nic;
+@@ -823,9 +826,10 @@ httpboot_fetch_buffer (EFI_HANDLE image, VOID **buffer, UINT64 *buf_size,
+ 
+ 	/* Use HTTP protocl to fetch the remote file */
+ 	efi_status = http_fetch (image, nic, hostname, next_uri, is_ip6,
+-				 buffer, buf_size);
++				 buffer, buf_size, flags);
+ 	if (EFI_ERROR(efi_status)) {
+-		perror(L"Failed to fetch image: %r\n", efi_status);
++		if (~flags & SUPPRESS_NETBOOT_OPEN_FAILURE_NOISE)
++			perror(L"Failed to fetch image: %r\n", efi_status);
+ 		goto error;
+ 	}
+ 
+diff --git a/include/httpboot.h b/include/httpboot.h
+index 119c546..3bb6f9c 100644
+--- a/include/httpboot.h
++++ b/include/httpboot.h
+@@ -12,6 +12,6 @@
+ 
+ extern BOOLEAN find_httpboot(EFI_HANDLE device);
+ extern EFI_STATUS httpboot_fetch_buffer(EFI_HANDLE image, VOID **buffer,
+-					UINT64 *buf_size, CHAR8 *name);
++					UINT64 *buf_size, CHAR8 *name, int flags);
+ 
+ #endif /* SHIM_HTTPBOOT_H */
+diff --git a/shim.c b/shim.c
+index b62042e..a066c21 100644
+--- a/shim.c
++++ b/shim.c
+@@ -331,7 +331,7 @@ EFI_STATUS read_image(EFI_HANDLE image_handle, CHAR16 *ImagePath,
+ 		efi_status = httpboot_fetch_buffer (image_handle,
+ 						    &sourcebuffer,
+ 						    &sourcesize,
+-						    netbootname);
++						    netbootname, flags);
+ 		if (EFI_ERROR(efi_status)) {
+ 			if (~flags & SUPPRESS_NETBOOT_OPEN_FAILURE_NOISE)
+ 				perror(L"Unable to fetch HTTP image %a: %r\n",

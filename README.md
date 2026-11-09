@@ -27,7 +27,7 @@ Here's the template:
 ### What organization or people are asking to have this signed?
 *******************************************************************************
 Organization name and website:  
-[your text here]
+OpenText   https://www.opentext.com/
 
 *******************************************************************************
 ### What's the legal data that proves the organization's genuineness?
@@ -37,7 +37,7 @@ Provide the information, which can prove the genuineness with certainty.
 Company/tax register entries or equivalent:  
 (a link to the organization entry in your jurisdiction's register will do)  
 
-[your text here]
+https://www.opentext.com/
 
 The public details of both your organization and the issuer in the EV certificate used for signing .cab files at Microsoft Hardware Dev Center File Signing Services.  
 (**not** the CA certificate embedded in your shim binary)
@@ -48,23 +48,24 @@ Example:
 Issuer: O=MyIssuer, Ltd., CN=MyIssuer EV Code Signing CA
 Subject: C=XX, O=MyCompany, Inc., CN=MyCompany, Inc.
 ```
-
-[your text here]
+Issuer: C=US, O=DigiCert, Inc., CN=DigiCert Trusted G4 Code Signing RSA4096 SHA384 2021 CA1
+Subject: jurisdictionC=CA, businessCategory=Private Organization, serialNumber=1083604-4, C=CA, ST=Ontario, L=Waterloo, O=Open Text Corporation, CN=Open Text Corporation
 
 *******************************************************************************
 ### What product or service is this for?
 *******************************************************************************
-[your text here]
+ZENworks - Unified Endpoint Management Solution (Imaging)
 
 *******************************************************************************
 ### What's the justification that this really does need to be signed for the whole world to be able to boot it?
 *******************************************************************************
-[your text here]
+We support software tools for OS Backup/Restore/Deployment for Windows and Linux. This tool is used on millions of end-point devices to manage day-to-day IT activities. Minimal Suse Linux Enterprise(SLE) distro (or) Windows Preboot Environment(WinPE) distro used to secure-boot the device in USB/CD/PXE mode.
 
 *******************************************************************************
 ### Why are you unable to reuse shim from another distro that is already signed?
 *******************************************************************************
-[your text here]
+We have custom code added in shim to prefer the proxyOffer instead of DhcpAck
+We have second stage boot loader, which talks to our server to get the work type and loads WinPE or SLES to do imaging and other tasks.
 
 *******************************************************************************
 ### Who is the primary contact for security updates, etc.?
@@ -75,20 +76,21 @@ You will be asked to post the contents of these mails in your `shim-review` issu
 Please upload the PGP keys to a well-known keyserver like keyserver.ubuntu.com and/or include them in the review as an .asc file, and point to them here.
 
 *******************************************************************************
-- Name:
-- Position:
-- Email address:
-- PGP key fingerprint:
-- File/keyserver location:
+- Name: Muthuvel K
+- Position: Lead Engineer
+- Email address: mkuppusamy@opentext.com
+- PGP key fingerprint: D6B3 FC57 4885 E1BB 9571  DD3D 7C19 A3F1 FB91 CAA9
+- File/keyserver location: hkps://keyserver.ubuntu.com
 
 *******************************************************************************
 ### Who is the secondary contact for security updates, etc.?
 *******************************************************************************
-- Name:
-- Position:
-- Email address:
-- PGP key fingerprint:
-- File/keyserver location:
+- Name: Anand Navale
+- Position: Product Architect
+- Email address: anavale@opentext.com
+- PGP key fingerprint: 5993 0320 8D95 01AC 4900 9EE2 203D 1BE8 164B B214
+- File/keyserver location: hkps://keyserver.ubuntu.com
+
 
 *******************************************************************************
 ### Were these binaries created from the 16.1 shim release tar?
@@ -122,34 +124,38 @@ authentic, please confirm this here with a simple *yes*.
 
 A short guide on verifying public keys and signatures should be available in the [docs](./docs/) directory.
 *******************************************************************************
-[your text here]
+Yes, Used the source from https://github.com/rhboot/shim/releases/download/16.1/shim-16.1.tar.bz2 
 
+Patches:
+       patches/1_prefer_proxyDhcpOfferReceived - Our custom patch to precedence for ProxyOfferReceived in IPV4/6
+       patches/2_http_netboot_open_faliure_noise.patch - Custom patches implemented to suppress HTTP boot-related file open failure noise..
 *******************************************************************************
 ### URL for a repo that contains the exact code which was built to result in your binary:
 Hint: If you attach all the patches and modifications that are being used to your application, you can point to the URL of your application here (*`https://github.com/YOUR_ORGANIZATION/shim-review`*).
 
 You can also point to your custom git servers, where the code is hosted.
 *******************************************************************************
-[your url here]
+https://github.com/MuthuvelKuppusamy/shim-review/tree/opentext-shim-x64-ia32-20261109
 
 *******************************************************************************
 ### What patches are being applied and why:
 Mention all the external patches and build process modifications, which are used during your building process, that make your shim binary be the exact one that you posted as part of this application.
 *******************************************************************************
-[your text here]
-
+Our custom patches:
+1. Code added to prefer proxyDhcpOfferReceived over dhcpAck for IPv4/6
+2. Custom patches implemented to suppress HTTP boot-related file open failure noise.
 *******************************************************************************
 ### Do you have the NX bit set in your shim? If so, is your entire boot stack NX-compatible and what testing have you done to ensure such compatibility?
 
 See https://techcommunity.microsoft.com/t5/hardware-dev-center/nx-exception-for-shim-community/ba-p/3976522 for more details on the signing of shim without NX bit.
 *******************************************************************************
-[your text here]
+No.
 
 *******************************************************************************
 ### What exact implementation of Secure Boot in GRUB2 do you have? (Either Upstream GRUB2 shim_lock verifier or Downstream RHEL/Fedora/Debian/Canonical-like implementation)
 Skip this, if you're not using GRUB2.
 *******************************************************************************
-[your text here]
+Downstream RHEL/Fedora/Debian/Canonical like implementation
 
 *******************************************************************************
 ### Do you have fixes for all the following GRUB2 CVEs applied?
@@ -217,21 +223,30 @@ Skip this, if you're not using GRUB2.
   * CVE-2025-1118
   * CVE-2025-1125
 *******************************************************************************
-[your text here]
+Yes.
 
 *******************************************************************************
 ### If shim is loading GRUB2 bootloader, and if these fixes have been applied, is the upstream global SBAT generation in your GRUB2 binary set to 5?
 Skip this, if you're not using GRUB2, otherwise do you have an entry in your GRUB2 binary similar to:  
 `grub,5,Free Software Foundation,grub,GRUB_UPSTREAM_VERSION,https://www.gnu.org/software/grub/`?
 *******************************************************************************
-[your text here]
+Yes.
+As below,
+
+sbat,1,SBAT Version,sbat,1,https://github.com/rhboot/shim/blob/main/SBAT.md
+grub,5,Free Software Foundation,grub,2.12,https://www.gnu.org/software/grub/
+grub.sle,1,SUSE Linux Enterprise,grub2,2.12,mail:security-team@suse.de
+grub.OTZENworks,1,OpenText,grub2,2.12-ZENworks1,https://www.opentext.com/
+
+
 
 *******************************************************************************
 ### Were old shims hashes provided to Microsoft for verification and to be added to future DBX updates?
 ### Does your new chain of trust disallow booting old GRUB2 builds affected by the CVEs?
 If you had no previous signed shim, say so here. Otherwise a simple _yes_ will do.
 *******************************************************************************
-[your text here]
+Older shim hashes provided to Microsoft.
+We have not included ntfs module in grub2 and older grub2 with sbat < 3 will be disallowed, we are safe with older grub's.
 
 *******************************************************************************
 ### If your boot chain of trust includes a Linux kernel:
@@ -241,30 +256,30 @@ If you had no previous signed shim, say so here. Otherwise a simple _yes_ will d
 Hint: upstream kernels should have all these applied, but if you ship your own heavily-modified older kernel version, that is being maintained separately from upstream, this may not be the case.  
 If you are shipping an older kernel, double-check your sources; maybe you do not have all the patches, but ship a configuration, that does not expose the issue(s).
 *******************************************************************************
-[your text here]
-
+We will use latest SuSE Linux Enterprise Server kernel(SLES15SP7) 6.4.0-150700.51-default , First two patches present in this kernel. 
+3rd one is not applicable as kernel debugging not allowed in kernel, as we are using PXE booted minimal distro environment to do imaging.
 *******************************************************************************
 ### How does your signed kernel enforce lockdown when your system runs with Secure Boot enabled?
 Hint: If it does not, we are not likely to sign your shim.
 *******************************************************************************
-[your text here]
+Our kernel prevents unauthorized modification of the kernel image and access to security-sensitive data.when in lockdown mode.
 
 *******************************************************************************
 ### Do you build your signed kernel with additional local patches? What do they do?
 *******************************************************************************
-[your text here]
+No, We consume kernel built by SUSE.
 
 *******************************************************************************
 ### Do you use an ephemeral key for signing kernel modules?
 ### If not, please describe how you ensure that one kernel build does not load modules built for another kernel.
 *******************************************************************************
-[your text here]
+We have not used ephemeral keys for kernel modules signing, We take as it is kernel and initrd from SUSE build images.
 
 *******************************************************************************
 ### If you use vendor_db functionality of providing multiple certificates and/or hashes please briefly describe your certificate setup.
 ### If there are allow-listed hashes please provide exact binaries for which hashes are created via file sharing service, available in public with anonymous access for verification.
 *******************************************************************************
-[your text here]
+No.
 
 *******************************************************************************
 ### If you are re-using the CA certificate from your last shim binary, you will need to add the hashes of the previous GRUB2 binaries exposed to the CVEs mentioned earlier to vendor_dbx in shim. Please describe your strategy.
@@ -272,7 +287,7 @@ This ensures that your new shim+GRUB2 can no longer chainload those older GRUB2 
 
 If this is your first application or you're using a new CA certificate, please say so here.
 *******************************************************************************
-[your text here]
+We have not included ntfs module in grub2 and older grub2 with sbat < 3 will be disallowed, we are safe with older grub's.
 
 *******************************************************************************
 ### Is the Dockerfile in your repository the recipe for reproducing the building of your shim binary?
@@ -282,13 +297,13 @@ Hint: Prefer using *frozen* packages for your toolchain, since an update to GCC,
 
 If your shim binaries can't be reproduced using the provided Dockerfile, please explain why that's the case, what the differences would be and what build environment (OS and toolchain) is being used to reproduce this build? In this case please write a detailed guide, how to setup this build environment from scratch.
 *******************************************************************************
-[your text here]
+Dockerfile with this repo used to build the shimx64.efi and shimia32.efi.
 
 *******************************************************************************
 ### Which files in this repo are the logs for your build?
 This should include logs for creating the buildroots, applying patches, doing the build, creating the archives, etc.
 *******************************************************************************
-[your text here]
+build.log file has comeplete build information for shimx64.efi,shimia32.efi build and sha256sum validation at the end for submitted and built binaries.
 
 *******************************************************************************
 ### What changes were made in the distro's secure boot chain since your SHIM was last signed?
@@ -296,24 +311,25 @@ For example, signing new kernel's variants, UKI, systemd-boot, new certs, new CA
 
 Skip this, if this is your first application for having shim signed.
 *******************************************************************************
-[your text here]
+No changes.
 
 *******************************************************************************
 ### What is the SHA256 hash of your final shim binary?
 *******************************************************************************
-[your text here]
+2359afa4d7fcc060772424443af215ffef563acd64e3c0817456084bf25e90a0  shimia32.efi
+f2cc8270cf2af0558bfa118d9c0862c25cacda7836b7c0d9dda578b3cf0ce740  shimx64.efi
 
 *******************************************************************************
 ### How do you manage and protect the keys used in your shim?
 Describe the security strategy that is used for key protection. This can range from using hardware tokens like HSMs or Smartcards, air-gapped vaults, physical safes to other good practices.
 *******************************************************************************
-[your text here]
+We moved to opentext CodeSEAL signing server. CodeSEAL will provide central management of our code signing process and make it more secure.
 
 *******************************************************************************
 ### Do you use EV certificates as embedded certificates in the shim?
 A _yes_ or _no_ will do. There's no penalty for the latter.
 *******************************************************************************
-[your text here]
+Yes.
 
 *******************************************************************************
 ### Are you embedding a CA certificate in your shim?
@@ -322,8 +338,7 @@ if _yes_: does that certificate include the X509v3 Basic Constraints
 to say that it is a CA? See the [docs](./docs/) for more guidance
 about this.
 *******************************************************************************
-[your text here]
-
+Yes.
 *******************************************************************************
 ### What certificates are embedded in your shim, and what are their key types and sizes?
 For each certificate embedded in your shim, state whether it is newly
@@ -337,8 +352,8 @@ are not required to replace it, but are strongly encouraged to replace
 smaller RSA keys with 4096-bit or larger keys when they have an
 appropriate opportunity to do so.
 *******************************************************************************
-[your text here]
-
+No changes in the embedded certificate approved in earlier shim-review https://github.com/rhboot/shim-review/issues/516.
+Public-Key: (4096 bit)
 *******************************************************************************
 ### Do you add a vendor-specific SBAT entry to the SBAT section in each binary that supports SBAT metadata ( GRUB2, fwupd, fwupdate, systemd-boot, systemd-stub, shim + all child shim binaries )?
 ### Please provide the exact SBAT entries for all binaries you are booting directly through shim.
@@ -350,7 +365,15 @@ If you are using a downstream implementation of GRUB2 (e.g. from Fedora or Debia
 
 Hint: run `objcopy --dump-section .sbat=/dev/stdout YOUR_EFI_BINARY` to get these entries. Paste them here. Preferably surround each listing with three backticks (\`\`\`), so they render well.
 *******************************************************************************
-[your text here]
+sbat,1,SBAT Version,sbat,1,https://github.com/rhboot/shim/blob/main/SBAT.md
+shim,4,UEFI shim,shim,1,https://github.com/rhboot/shim
+shim.OTZENworks,1,OpenText,shim,16.1,https://www.opentext.com/
+
+grub:
+sbat,1,SBAT Version,sbat,1,https://github.com/rhboot/shim/blob/main/SBAT.md
+grub,5,Free Software Foundation,grub,2.12,https://www.gnu.org/software/grub/
+grub.sle,1,SUSE Linux Enterprise,grub2,2.12,mail:security-team@suse.de
+grub.OTZENworks,1,OpenText,grub2,2.12-ZENworks1,https://www.opentext.com/
 
 *******************************************************************************
 ### If shim is loading GRUB2 bootloader, which modules are built into your signed GRUB2 image?
@@ -358,45 +381,48 @@ Skip this, if you're not using GRUB2.
 
 Hint: this is about those modules that are in the binary itself, not the `.mod` files in your filesystem.
 *******************************************************************************
-[your text here]
+grub-core all_video boot cat chain configfile echo true efinet font gfxmenu gfxterm gzio halt iso9660 jpeg 
+minicmd normal part_apple part_msdos part_gpt password_pbkdf2 png reboot search search_fs_uuid search_fs_file 
+search_label sleep test video fat loadenv linuxefi btrfs ext2 xfs jfs reiserfs efinet tftp http luks gcry_rijndael 
+gcry_sha1 gcry_sha256 mdraid09 mdraid1x lvm serial
 
 *******************************************************************************
 ### If you are using systemd-boot on arm64 or riscv, is the fix for [unverified Devicetree Blob loading](https://github.com/systemd/systemd/security/advisories/GHSA-6m6p-rjcq-334c) included?
 *******************************************************************************
-[your text here]
+NA
 
 *******************************************************************************
 ### What is the origin and full version number of your bootloader (GRUB2 or systemd-boot or other)?
 *******************************************************************************
-[your text here]
+https://github.com/MuthuvelKuppusamy/shim-review/tree/opentext-shim-x64-ia32-20261109/grub2
 
 *******************************************************************************
 ### If your shim launches any other components apart from your bootloader, please provide further details on what is launched.
 Hint: The most common case here will be a firmware updater like fwupd.
 *******************************************************************************
-[your text here]
+In case of PXE boot, we launch our custom efi binary, which talks to our server and get the work details and loads WinPE(Windows Preboot Environment) or Suse-Linux based on the work type.
 
 *******************************************************************************
 ### If your GRUB2 or systemd-boot launches any other binaries that are not the Linux kernel in SecureBoot mode, please provide further details on what is launched and how it enforces Secureboot lockdown.
 Skip this, if you're not using GRUB2 or systemd-boot.
 *******************************************************************************
-[your text here]
+No.
 
 *******************************************************************************
 ### How do the launched components prevent execution of unauthenticated code?
 Summarize in one or two sentences, how your secure bootchain works on higher level.
 *******************************************************************************
-[your text here]
+Used shim_lock to validate the chain loaded binaries.
 
 *******************************************************************************
 ### Does your shim load any loaders that support loading unsigned kernels (e.g. certain GRUB2 configurations)?
 *******************************************************************************
-[your text here]
+No.
 
 *******************************************************************************
 ### What kernel are you using? Which patches and configuration does it include to enforce Secure Boot?
 *******************************************************************************
-[your text here]
+Suse Linux Enterprise kernel SLES15SP7 6.4.0-150700.51-default, which has the all the required patches to enforce the secure boot.
 
 *******************************************************************************
 ### What contributions have you made to help us review the applications of other applicants?
@@ -406,9 +432,9 @@ A reasonable timeframe of waiting for a review can reach 2-3 months. Helping us 
 
 For newcomers, the applications labeled as [*easy to review*](https://github.com/rhboot/shim-review/issues?q=is%3Aopen+is%3Aissue+label%3A%22easy+to+review%22) are recommended to start the contribution process.
 *******************************************************************************
-[your text here]
+Done couple of reviews.
 
 *******************************************************************************
 ### Add any additional information you think we may need to validate this shim signing application.
 *******************************************************************************
-[your text here]
+NA
