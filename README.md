@@ -128,7 +128,7 @@ Yes, Used the source from https://github.com/rhboot/shim/releases/download/16.1/
 
 Patches:
        patches/1_prefer_proxyDhcpOfferReceived - Our custom patch to precedence for ProxyOfferReceived in IPV4/6
-       patches/2_http_netboot_open_faliure_noise.patch - Custom patches implemented to suppress HTTP boot-related file open failure noise..
+       patches/2_http_netboot_open_failure_noise.patch - Custom patches implemented to suppress HTTP boot-related file open failure noise..
 *******************************************************************************
 ### URL for a repo that contains the exact code which was built to result in your binary:
 Hint: If you attach all the patches and modifications that are being used to your application, you can point to the URL of your application here (*`https://github.com/YOUR_ORGANIZATION/shim-review`*).
